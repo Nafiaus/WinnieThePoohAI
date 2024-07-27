@@ -3,9 +3,13 @@ This program is using Python Version 3.9
 In Terminal do:
 
 python -m pip install -U upgrade
+
 python -m pip install -U playsound
+
 python -m pip install -U openai
+
 python -m pip install -U elevenlabs
+
 python -m pip install -U pygame
 
 setx OPENAI_API_KEY your_api_key_here
