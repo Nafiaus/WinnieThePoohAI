@@ -1,5 +1,7 @@
 This program is using Python Version 3.9
 
+You have to run both keyboard_listener.py and winnie.py if you want all the features to work
+
 In Terminal do:
 
 python -m pip install -U upgrade
