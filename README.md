@@ -18,6 +18,8 @@ python -m pip install -U pyaudio
 
 python -m pip install -U elevenlabs
 
+python -m pip install -U pydub
+
 python -m pip install -U pygame
 
 setx OPENAI_API_KEY your_api_key_here
