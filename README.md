@@ -6,7 +6,13 @@ python -m pip install -U upgrade
 
 python -m pip install -U playsound
 
+python -m pip install -U keyboard
+
 python -m pip install -U openai
+
+python -m pip install -U emoji
+
+python -m pip install -U pyaudio
 
 python -m pip install -U elevenlabs
 
