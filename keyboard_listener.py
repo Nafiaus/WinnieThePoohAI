@@ -1,7 +1,6 @@
 
 import keyboard
 import pyaudio
-import os
 import socket
 import wave
 
