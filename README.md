@@ -20,7 +20,8 @@ python -m pip install -U elevenlabs
 
 python -m pip install -U pygame
 
-setx OPENAI_API_KEY your_api_key_here
+setx OPENAI_API_KEY your_openai_api_key_here
+setx ELEVEN_API_KEY your_elevenlabs_api_key_here
 
 You then create an Capture Audio source listening to python.exe in OBS and a Window Capture listening for the title of your program (in this case "Winnie the Pooh AI"). Make sure to create a Chromakey Filter on the Window Capture to remove the green background.
 
