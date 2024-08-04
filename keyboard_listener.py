@@ -22,21 +22,23 @@ audioChannels = 1
 audioFilename = r'res\audio_recording.wav'  
 running = True
 
+
 twitch = socket.socket()
 twitch.connect((server, port))
 twitch.send(f'CAP REQ :{capReq}\n'.encode())
 twitch.send(f'PASS {twitchOauth}\n'.encode())
 twitch.send(f'NICK {nickname}\n'.encode())
 twitch.send(f'JOIN {channel}\n'.encode())
+print(f'joined {channel}')
 
-        
-def sendBotMessage():
-    twitch.send(f'PRIVMSG {channel} :!audio\n'.encode())
-    
 while running:
+    twitchraw = twitch.recv(4096).decode()
+    if (twitchraw.find('PING') != -1):
+        twitch.send(f'PONG :tmi.twitch.tv\n'.encode())
+        print('ping pong')
     try:
         if(keyboard.is_pressed('f9')):
-            print('f9 pressed...')
+            print('initalizing...')
             recorder = pyaudio.PyAudio()
             stream = recorder.open(format=sampleFormat,
                 channels=audioChannels,
@@ -44,19 +46,19 @@ while running:
                 input=True,
                 frames_per_buffer=chunk
             )
+            
             print('recording...')
             frames = []
-    
             for i in range(0, int(sampleRate / chunk * seconds)):
                 data = stream.read(chunk)
                 frames.append(data)
-        
+                
+            print('stopping...')
             stream.stop_stream()
             stream.close()
-    
             recorder.terminate()
-            print('done recording.')
-    
+            
+            print('saving...')
             with wave.open(audioFilename, 'wb') as saveSound:
                 saveSound.setnchannels(audioChannels)
                 saveSound.setsampwidth(recorder.get_sample_size(sampleFormat))
@@ -64,8 +66,9 @@ while running:
                 saveSound.writeframes(b''.join(frames))
                 saveSound.close()
             
-            sendBotMessage()
-        else:
+            print('file saved.')
+            twitch.send(f'PRIVMSG {channel} :!audio\n'.encode())
+        else: # Do nothing
             pass
-    except:
+    except: # Do nothing
         pass
